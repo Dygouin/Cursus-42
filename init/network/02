@@ -1,0 +1,2 @@
+ifconfig en0 | grep broadcast | rev | cut -d ' ' -f1 | rev
+ping -q -c10 224.0.0.1 > /dev/null ; arp -a | cut -d ')' -f1 | cut -d '(' -f2
