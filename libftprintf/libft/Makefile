@@ -6,7 +6,7 @@
 #    By: dygouin <dygouin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 10:47:24 by vlambert          #+#    #+#              #
-#    Updated: 2019/02/05 11:11:06 by dygouin          ###   ########.fr        #
+#    Updated: 2019/02/05 15:36:55 by dygouin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,9 @@ all:		$(NAME)
 $(NAME):	$(OBJS) ft_printf.h
 	@ ar rc $(NAME) $(OBJS)
 	@ ranlib $(NAME)
-	@ echo "libftprintf est compilée"
+	@ printf "\033[38;2;0;255;0m"
+	@ printf "libftprintf est compilée\n"
+	@ printf "\033[0m"
 
 $(OBJS):	$(SRC)
 	@ mkdir -p objects
@@ -47,11 +49,15 @@ $(OBJS):	$(SRC)
 
 clean:
 	@ rm -rf objects
-	@ echo "Les .o sont supprimés"
+	@ printf "\033[38;2;255;0;0m"
+	@ printf "Les .o sont supprimés\n"
+	@ printf "\033[0m"
 
 fclean:		clean
 	@ rm -rf $(NAME)
-	@ echo "$(NAME) est supprimée"
+	@ printf "\033[38;2;255;0;0m"
+	@ printf "$(NAME) est supprimée\n"
+	@ printf "\033[0m"
 
 re:			fclean all
 
