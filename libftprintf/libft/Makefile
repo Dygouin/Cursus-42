@@ -6,13 +6,13 @@
 #    By: dygouin <dygouin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 10:47:24 by vlambert          #+#    #+#              #
-#    Updated: 2019/02/01 20:05:35 by dygouin          ###   ########.fr        #
+#    Updated: 2019/02/05 11:11:06 by dygouin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	libftprintf.a
-FLAGS	=	-Wall -Wextra -Werror
-SRC		=	ft_printf.c arg.c width.c precision.c flags.c charfunctions.c \
+NAME=		libftprintf.a
+FLAGS=		-Wall -Wextra -Werror
+SRC=		ft_printf.c arg.c width.c precision.c flags.c charfunctions.c \
 			ft_ltoa_base.c ft_putfloat.c ft_putunicode.c tools.c \
 			nbrfunction.c otherfunctions.c specifier.c \
 			ft_atoi.c ft_bzero.c ft_fibonacci.c ft_is_lowerc.c ft_is_upperc.c \
@@ -29,34 +29,30 @@ SRC		=	ft_printf.c arg.c width.c precision.c flags.c charfunctions.c \
 			ft_strnstr.c ft_strrchr.c ft_strrev.c ft_strsplit.c ft_strstr.c \
 			ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c \
 			get_next_line.c
-OBJ		=	$(SRC:.c=.o)
+OBJ=		$(SRC:.c=.o)
 
-RED		=	\033[0;31m
-
-GREEN	=	\033[0;32m
-
-RESET	=	\033[0m
+OBJS=		$(addprefix objects/, $(OBJ))
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ) ft_printf.h
-	@ ar rc $(NAME) $(OBJ)
+$(NAME):	$(OBJS) ft_printf.h
+	@ ar rc $(NAME) $(OBJS)
 	@ ranlib $(NAME)
-	@ mkdir objects
-	@ mv *.o objects/.
-	@ echo "$(GREEN)libftprintf est compilée$(RESET)"
+	@ echo "libftprintf est compilée"
 
-$(OBJ):		$(SRC)
+$(OBJS):	$(SRC)
+	@ mkdir -p objects
 	@ gcc $(FLAGS) -c $?
+	@ mv $(OBJ) objects/.
 
 clean:
 	@ rm -rf objects
-	@ echo "$(RED)Les .o sont supprimés$(RESET)"
+	@ echo "Les .o sont supprimés"
 
 fclean:		clean
 	@ rm -rf $(NAME)
-	@ echo "$(RED)$(NAME) est supprimée$(RESET)"
+	@ echo "$(NAME) est supprimée"
 
 re:			fclean all
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re all
